@@ -7,5 +7,5 @@ from .models import *
 admin.site.register(Recipe)
 admin.site.register(Tag)
 admin.site.register(Unit)
-admin.site.register(Instructions)
+admin.site.register(Instruction)
 admin.site.register(Ingredient)
