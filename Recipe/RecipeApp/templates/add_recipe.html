@@ -2,14 +2,17 @@
 
 {% load bootstrap4 %}
 
-{% block title %}Home -{% endblock %}
+{% block title %}Nouvelle recette -{% endblock %}
 
 {% block content %}
 {% if user.is_authenticated %}
+
     <div class="card">
+        <h5 class="card-header">Nouvelle recette</h5>
         <div class="card-body">
             
         </div>
     </div>
+
 {% endif %}
 {% endblock %}
