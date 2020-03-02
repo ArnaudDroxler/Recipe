@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% load bootstrap4 %}
+
+{% block head %}<script src="{% static "/RecipeApp/mustache.min.js" %}"></script>{% endblock %}
+
 
 {% block title %}Nouvelle recette -{% endblock %}
 
@@ -10,9 +14,78 @@
     <div class="card">
         <h5 class="card-header">Nouvelle recette</h5>
         <div class="card-body">
-            
+            <form action="{% url 'add_recipe' %}" methode="post" >
+            {% csrf_token %}
+                <div class="row">
+                    <div class="col-4">
+                        <h5 class="title">Liste des ingrédient</h5>
+                        <div id="ingredient_target">
+                        </div>
+                        <button type="button" class="btn btn-outline-primary" id="add_ingredient"><i style="vertical-align: bottom;" class="material-icons">add</i></button>
+                        <button type="button" class="btn btn-outline-secondary" id="remove_ingredient"><i style="vertical-align: bottom;" class="material-icons">remove</i></button>
+                    </div>
+                    <div class="col-6">
+                        <h5 class="title">Liste des instruction</h5>
+                        <div id="instruction_target">
+                        </div>
+                        <button type="button" class="btn btn-outline-primary" id="add_instruction"><i style="vertical-align: bottom;" class="material-icons">add</i></button>
+                        <button type="button" class="btn btn-outline-secondary" id="remove_instruction"><i style="vertical-align: bottom;" class="material-icons">remove</i></button>
+                    </div>
+                </div>
+                <hr class="mt-0 mb-4 hr-transparent">  
+                <div class="row">
+                    <div class="col-9">
+                        <input type="submit"class="btn btn-primary"  value="Submit">
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 
 {% endif %}
 {% endblock %}
+
+{% block foot %}
+
+<script type="text/template" id="ingredient_template">
+    <div class="form-row align-items-center" id="ingredient_row">
+        <div class="col-auto">
+            <input type="text" class="form-control mb-2" id="name_{{count}}" placeholder="Ingrédient">
+        </div>
+        <div class="col-auto">
+            <input type="number" class="form-control mb-2" id="amount_{{count}}" placeholder="Quantité" min="1" max="100000">
+        </div>
+        <div class="col-auto">
+            <select class="custom-select mb-2" id="unit_select_{{count}}">
+                {% for unit in units %}
+                    <option value="{{unit.id}}">{{ unit.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="instruction_template">
+    <div class="form-row align-items-center" id="instruction_row">
+        <div class="col-auto">
+            <input type="text" class="form-control mb-2" id="name_{{count}}" placeholder="Ingrédient">
+        </div>
+        <div class="col-auto">
+            <input type="number" class="form-control mb-2" id="amount_{{count}}" placeholder="Quantité" min="1" max="100000">
+        </div>
+        <div class="col-auto">
+            <select class="custom-select mb-2" id="unit_select_{{count}}">
+                {% for unit in units %}
+                    <option value="{{unit.id}}">{{ unit.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+</script>
+
+<script src="{% static "/RecipeApp/add_recipe.js" %}"></script>
+
+
+
+{% endblock %}
+
