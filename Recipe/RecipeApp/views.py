@@ -17,7 +17,8 @@ def add_recipe(request):
             pass
         if request.method == 'GET':    
             units_all = Unit.objects.all()    
-            context = {'add_recipe': 'active', 'units': units_all}
+            tags_all = Tag.objects.all()
+            context = {'add_recipe': 'active', 'units': units_all, 'tags': tags_all,}
             return render(request, 'add_recipe.html', context)
 
 

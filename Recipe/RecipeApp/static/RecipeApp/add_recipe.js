@@ -15,6 +15,7 @@ var instruction_template = $("#instruction_template").html();
 var instruction_target = $("#instruction_target")
 var instruction_inputRow = [];
 
+
 $( "#add_ingredient" ).click(function() {
     add_ingredient_rows()
 });
@@ -25,10 +26,7 @@ $( "#remove_ingredient" ).click(function() {
 
 function add_ingredient_rows(){
     if(ingredient_count <= ingredient_max){
-      inputRow = {
-        count : ingredient_count
-      }
-      var html = Mustache.render(ingredient_template, inputRow);
+      var html = ingredient_template.split('[[ count ]]').join(ingredient_count)
       ingredient_target.append(html);
       ingredient_count++;
     }
@@ -54,10 +52,7 @@ $( "#remove_instruction" ).click(function() {
 
 function add_instruction_rows(){
     if(instruction_count <= instruction_max){
-      inputRow = {
-        count : instruction_count
-      }
-      var html = Mustache.render(instruction_template, inputRow);
+      var html = instruction_template.split('[[ count ]]').join(instruction_count)
       instruction_target.append(html);
       instruction_count++;
     }
