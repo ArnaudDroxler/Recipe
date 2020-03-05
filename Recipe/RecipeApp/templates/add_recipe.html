@@ -22,14 +22,14 @@
                <div class="row">
 
                     <div class="col-6">
-                        <input type="text" class="form-control" name="recipe_name" placeholder="Nom de la recette">
+                        <input type="text" class="form-control" name="recipe_name" placeholder="Nom de la recette" required>
                     </div>
                     <div class="col-3">
                         <div class="input-group">
                             <div class="input-group-prepend">
                             <div class="input-group-text"><i class="material-icons md-36" style="display: inline-flex;vertical-align: text-bottom;">timer</i></div>
                             </div>
-                            <input type="number" class="form-control" name="recipe_duration" placeholder="Durée">
+                            <input type="number" class="form-control" name="recipe_duration" placeholder="Durée" required>
                         </div>
                     </div>
                     <div class="col-3">
@@ -37,22 +37,22 @@
                             <div class="input-group-prepend">
                             <div class="input-group-text"><i class="material-icons md-36" style="display: inline-flex;vertical-align: text-bottom;">room_service</i></div>
                             </div>
-                            <input type="number" class="form-control" name="recipe_serving" placeholder="Portion">
+                            <input type="number" class="form-control" name="recipe_serving" placeholder="Portion" required>
                         </div>
                     </div>
                 </div>
                 <hr class="mt-0 mb-4 hr-transparent">  
-                <div class="row ">
+                <div class="row">
                     <div class="col">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="inputGroupSelect01">Tags</label>
-                            </div>
-                            <select class="selectpicker" data-style="btn-outline-secondary"  data-width="92.2%" multiple>
-                                {% for tag in tags %}
-                                    <option>{{tag.tag}}</option>
-                                {% endfor %}
-                            </select>
+                        <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                                    <label class="input-group-text" for="select" data-width="10%" >Tags</label>
+                                </div>
+                        <select class="selectpicker form-control" data-style="btn-outline-secondary" multiple>
+                            {% for tag in tags %}
+                                        <option>{{tag.tag}}</option>
+                                    {% endfor %}
+                        </select>
                         </div>
                     </div>
                 </div>
@@ -91,13 +91,13 @@
 <script type="text/template" id="ingredient_template">
     <div class="form-row align-items-center" id="ingredient_row">
         <div class="col">
-            <input type="text" class="form-control mb-2" name="ingredient_name_[[ count ]]" placeholder="Ingrédient">
+            <input type="text" class="form-control mb-2" name="ingredient_name_[[ count ]]" placeholder="Ingrédient" required>
         </div>
         <div class="col-4">
-            <input type="number" class="form-control mb-2" name="ingredient_amount_[[ count ]]" placeholder="Quantité" min="1" max="100000">
+            <input type="number" class="form-control mb-2" name="ingredient_amount_[[ count ]]" placeholder="Quantité" min="1" max="100000" required>
         </div>
         <div class="col-3">
-            <select class="custom-select mb-2" name="ingredient_unit_select_[[ count ]]" placeholder="Unité">
+            <select class="custom-select mb-2" name="ingredient_unit_select_[[ count ]]" placeholder="Unité" required>
                 <option selected>Unité</option>
                 {% for unit in units %}
                     <option value="{{unit.id}}">{{ unit.name }}</option>
@@ -111,7 +111,7 @@
     <div class="row" id="instruction_row">
         <div class="col">
           <div class="form-group">
-                <textarea class="form-control"  id="text_[[ count ]]" name="text_[[ count ]]"rows="3" placeholder="[[ count ]]. étape"></textarea>
+                <textarea class="form-control"  id="text_[[ count ]]" name="text_[[ count ]]"rows="3" placeholder="[[ count ]]. étape" required></textarea>
             </div>
         </div>
     </div>
