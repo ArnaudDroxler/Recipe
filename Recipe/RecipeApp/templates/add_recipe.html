@@ -17,7 +17,7 @@
     <div class="card">
         <h5 class="card-header">Nouvelle recette</h5>
         <div class="card-body">
-            <form action="{% url 'add_recipe' %}" methode="post" >
+            <form action="{% url 'add_recipe' %}" method="post" >
             {% csrf_token %}
                <div class="row">
 
@@ -27,9 +27,14 @@
                     <div class="col-3">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                            <div class="input-group-text"><i class="material-icons md-36" style="display: inline-flex;vertical-align: text-bottom;">timer</i></div>
+                                <div class="input-group-text">
+                                    <i class="material-icons md-36" style="display: inline-flex;vertical-align: text-bottom;">timer</i>
+                                </div>
                             </div>
                             <input type="number" class="form-control" name="recipe_duration" placeholder="Durée" required>
+                            <div class="input-group-append">
+                                 <span class="input-group-text">min</span>
+                            </div>
                         </div>
                     </div>
                     <div class="col-3">
@@ -46,12 +51,12 @@
                     <div class="col">
                         <div class="input-group form-group">
                         <div class="input-group-prepend">
-                                    <label class="input-group-text" for="select" data-width="10%" >Tags</label>
-                                </div>
-                        <select class="selectpicker form-control" data-style="btn-outline-secondary" multiple>
+                            <label class="input-group-text" for="select">Tags</label>
+                        </div>
+                        <select class="selectpicker form-control" data-style="btn-outline-secondary" name="tags" multiple>
                             {% for tag in tags %}
-                                        <option>{{tag.tag}}</option>
-                                    {% endfor %}
+                                <option>{{tag.tag}}</option>
+                            {% endfor %}
                         </select>
                         </div>
                     </div>
@@ -76,13 +81,14 @@
                 <hr class="mt-0 mb-4 hr-transparent">  
                 <div class="row ">
                     <div class="col">
-                        <input type="submit"class="btn btn-primary  float-right"  value="Submit">
+                        <input type="hidden" id="instruction_count" name="instruction_count" value="">
+                        <input type="hidden" id="ingredient_count" name="ingredient_count" value="">
+                        <input type="submit" class="btn btn-primary float-right"  value="Submit">
                     </div>
                 </div>
             </form>
         </div>
     </div>
-
 {% endif %}
 {% endblock %}
 
@@ -111,7 +117,7 @@
     <div class="row" id="instruction_row">
         <div class="col">
           <div class="form-group">
-                <textarea class="form-control"  id="text_[[ count ]]" name="text_[[ count ]]"rows="3" placeholder="[[ count ]]. étape" required></textarea>
+                <textarea class="form-control"  id="text_[[ count ]]" name="text_[[ count ]]"rows="3" placeholder="[[ count+1 ]]. étape" required></textarea>
             </div>
         </div>
     </div>
