@@ -5,12 +5,14 @@ class Tag(models.Model):
     tag = models.CharField(max_length=250, default="", null=False)
 
     def __str__(self):
-        return self.tag
+        return "Id :" + str(self.pk) + " Tag :" + self.tag
 
 class Recipe(models.Model):
     name = models.CharField(max_length=100, null=False)
     duration = models.IntegerField(default=0, null=False)
     serving = models.IntegerField(default=1, null=False)
+    description = models.TextField(max_length=1000, default="", null=False)
+    note = models.TextField(max_length=1000, default="", null=False)
     tags = models.ManyToManyField(Tag)
 
     def __str__(self):
@@ -20,7 +22,7 @@ class Unit(models.Model):
     name = models.CharField(max_length=25, default="", null=False)
 
     def __str__(self):
-        return self.name
+        return "Id :" + str(self.pk) + " Name :" + self.name
 
 
 class Ingredient(models.Model):

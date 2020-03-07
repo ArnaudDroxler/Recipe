@@ -20,7 +20,6 @@
             <form action="{% url 'add_recipe' %}" method="post" >
             {% csrf_token %}
                <div class="row">
-
                     <div class="col-6">
                         <input type="text" class="form-control" name="recipe_name" placeholder="Nom de la recette" required>
                     </div>
@@ -49,7 +48,7 @@
                 <hr class="mt-0 mb-4 hr-transparent">  
                 <div class="row">
                     <div class="col">
-                        <div class="input-group form-group">
+                        <div class="input-group">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="select">Tags</label>
                         </div>
@@ -58,6 +57,28 @@
                                 <option>{{tag.tag}}</option>
                             {% endfor %}
                         </select>
+                        </div>
+                    </div>
+                </div>
+                <hr class="mt-0 mb-4 hr-transparent">  
+                <div class="row">
+                    <div class="col">
+                       <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Description</span>
+                        </div>
+                        <textarea class="form-control" aria-label="Description" name="recipe_description" rows="1"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <hr class="mt-0 mb-4 hr-transparent">  
+                <div class="row">
+                    <div class="col">
+                       <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Note</span>
+                        </div>
+                        <textarea class="form-control" aria-label="Note" name="recipe_note" rows="1"></textarea>
                         </div>
                     </div>
                 </div>
@@ -95,7 +116,7 @@
 {% block foot %}
 
 <script type="text/template" id="ingredient_template">
-    <div class="form-row align-items-center" id="ingredient_row">
+    <div class="form-row align-items-center" id="ingredient_row_[[ count ]]">
         <div class="col">
             <input type="text" class="form-control mb-2" name="ingredient_name_[[ count ]]" placeholder="Ingrédient" required>
         </div>
@@ -104,7 +125,6 @@
         </div>
         <div class="col-3">
             <select class="custom-select mb-2" name="ingredient_unit_select_[[ count ]]" placeholder="Unité" required>
-                <option selected>Unité</option>
                 {% for unit in units %}
                     <option value="{{unit.id}}">{{ unit.name }}</option>
                 {% endfor %}
@@ -114,10 +134,10 @@
 </script>
 
 <script type="text/template" id="instruction_template">
-    <div class="row" id="instruction_row">
+    <div class="row" id="instruction_row_[[ count ]]">
         <div class="col">
           <div class="form-group">
-                <textarea class="form-control"  id="text_[[ count ]]" name="text_[[ count ]]"rows="3" placeholder="[[ count+1 ]]. étape" required></textarea>
+                <textarea class="form-control"  id="text_[[ count ]]" name="text_[[ count ]]" rows="3" placeholder="[[ count+1 ]]. étape" required></textarea>
             </div>
         </div>
     </div>

@@ -13,7 +13,7 @@ def home(request):
 
         page = request.GET.get('page', 1)
 
-        paginator = Paginator(recipes_all, 1)
+        paginator = Paginator(recipes_all, 12)
 
         try:
             recipes = paginator.page(page)
@@ -34,11 +34,13 @@ def add_recipe(request):
             recipe_name = request.POST['recipe_name']
             recipe_duration = request.POST['recipe_duration']
             recipe_serving = request.POST['recipe_serving']
+            recipe_description = request.POST['recipe_description']
+            recipe_note = request.POST['recipe_note']
             instruction_count = int(request.POST['instruction_count'])
             ingredient_count = int(request.POST['ingredient_count'])
             recipe_tags = request.POST.getlist('tags')
 
-            new_recipe = Recipe(name=recipe_name,duration=recipe_duration,serving=recipe_serving)
+            new_recipe = Recipe(name=recipe_name,duration=recipe_duration,serving=recipe_serving,description=recipe_description,note=recipe_note)
             new_recipe.save()
 
             for recipe_tag in recipe_tags:

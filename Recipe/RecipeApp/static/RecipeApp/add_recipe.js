@@ -33,9 +33,9 @@ function add_ingredient_rows(){
   }
   
 function remove_ingredient_rows(){
-    ingredient_target.find('#ingredient_row').last().remove();
+    ingredient_target.find(".form-row").last().remove();
     if(ingredient_count <= 1){
-        ingredient_count = 1
+        ingredient_count = 0
     }else{
         ingredient_count--
     }
@@ -62,9 +62,9 @@ function add_instruction_rows(){
   }
   
 function remove_instruction_rows(){
-    instruction_target.find('#instruction_row').last().remove();
+    instruction_target.find(".row").last().remove();
     if(instruction_count <= 1){
-        instruction_count = 1
+        instruction_count = 0
     }else{
         instruction_count--
     }
