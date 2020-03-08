@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% load bootstrap4 %}
+
+{% block title %} {{recipe.name}} -{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <div class="card">
+        <h5 class="card-header"> {{recipe.name}}</h5>
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <h5 class="title">Ingrédients</h5>
+                    {% for ingredient in ingredients %}
+                        {{ingredient.name}}
+                    {% endfor %}
+                    </ul>
+                </div>
+                <div class="col">
+                    <h5 class="title">Instructions</h5>
+                    {% for instruction in instructions %}
+                       {{instruction.text}}
+                    {% endfor %}
+                </div>
+             </div>
+        </div>
+    </div>
+    
+    <hr class="mt-0 mb-4 hr-transparent">  
+   
+
+{% endif %}
+{% endblock %}

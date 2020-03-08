@@ -74,6 +74,14 @@ def add_recipe(request):
             context = {'add_recipe': 'active', 'units': units_all, 'tags': tags_all,}
             return render(request, 'add_recipe.html', context)
 
+def view_recipe(request,recipe_slug):
+
+    recipe = Recipe.objects.get(slug=recipe_slug)
+    ingredients = Ingredient.objects.filter(recipe=recipe)
+    instructions = Instruction.objects.filter(recipe=recipe).order_by('sort')
+
+    context = {'recipe': recipe, 'ingredients': ingredients,'instructions': instructions}
+    return render(request, 'view_recipe.html', context)
 
 def settings(request):
     if request.user.is_authenticated:

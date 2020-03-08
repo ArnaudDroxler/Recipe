@@ -20,9 +20,10 @@
             {% for recipe in recipes %}
 
                 <div class="col mb-4 lg-4 xl-4">
-                    <div class="card">
-                        <a href="#" class="btn btn-fix text-left">
-                            <div class="card-body">
+                    <div class="card h-100">
+      
+                        <a href="recipe/view/{{recipe.slug}}/" class="btn btn-fix text-left ">
+                            <div class="card-body ">
                                 <h5 class="card-title">{{recipe.name}}</h5>
                                 <h6 class="card-subtitle mb-2 text-muted"><i class="material-icons md-18" style="display: inline-flex;vertical-align: text-bottom;">timer</i>{{recipe.duration}} min</h6>
                                 <p class="card-text"> 
