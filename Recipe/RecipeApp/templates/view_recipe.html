@@ -8,28 +8,57 @@
 {% block content %}
 {% if user.is_authenticated %}
     <div class="card">
-        <h5 class="card-header"> {{recipe.name}}</h5>
+        <div class="card-header">
+            <div class="row">
+                <div class="col-6">
+                    <h4 class="h4" class="fixed-bottom"> {{recipe.name}}</h4>
+                </div>
+                <div class="col-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text" >
+                                <i class="material-icons md-36" style="display: inline-flex;vertical-align: text-bottom;">timer</i>
+                            </div>
+                        </div>
+                        <input type="number" class="form-control text-right" name="recipe_duration" placeholder="Durée" value="{{recipe.duration}}" style="background-color: white;" readonly>
+                        <div class="input-group-append">
+                                <span class="input-group-text">min</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="material-icons md-36" style="display: inline-flex;vertical-align: text-bottom;">room_service</i></div>
+                        </div>
+                            <input type="number" class="form-control text-right" name="recipe_serving" placeholder="Portion" value="{{recipe.serving}}" style="background-color: white;" readonly>
+                        </div>
+                    </div>
+                </div>
+
+          </div>
         <div class="card-body">
             <div class="row">
                 <div class="col">
                     <h5 class="title">Ingrédients</h5>
                     {% for ingredient in ingredients %}
-                        {{ingredient.name}}
+                        <p>
+                        {{ingredient.amount}} {{ingredient.name}} {{ingredient.unit.name}}
+                        </p>
                     {% endfor %}
                     </ul>
                 </div>
                 <div class="col">
                     <h5 class="title">Instructions</h5>
                     {% for instruction in instructions %}
-                       {{instruction.text}}
+                        <p>
+                            {{instruction.sort}}. {{instruction.text}}
+                        </p>
                     {% endfor %}
                 </div>
              </div>
         </div>
     </div>
-    
-    <hr class="mt-0 mb-4 hr-transparent">  
-   
 
 {% endif %}
 {% endblock %}
