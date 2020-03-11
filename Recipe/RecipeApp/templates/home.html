@@ -9,9 +9,9 @@
 {% if user.is_authenticated %}
     <div class="card">
         <div class="card-header">
-        <form class="form-inline  float-right">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <form class="form-inline  float-right" action="{% url 'home' %}" >
+            <input class="form-control mr-sm-2" type="search" id="search" name="search" placeholder="Search" aria-label="Search">
+            <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Recherche">
         </form>
         </div>
         <div class="card-body">
@@ -25,7 +25,7 @@
                         <a href="recipe/view/{{recipe.slug}}/" class="btn btn-fix text-left ">
                             <div class="card-body ">
                                 <h5 class="card-title">{{recipe.name}}</h5>
-                                <h6 class="card-subtitle mb-2 text-muted"><i class="material-icons md-18" style="display: inline-flex;vertical-align: text-bottom;">timer</i>{{recipe.duration}} min</h6>
+                                <h6 class="card-subtitle mb-2 text-muted"><i class="material-icons md-18" style="display: inline-flex;vertical-align: text-bottom;">timer</i>{{ recipe.duration}} min</h6>
                                 <p class="card-text"> 
                                     {{recipe.description}}
                                 </p>

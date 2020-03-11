@@ -10,9 +10,18 @@
     <div class="card">
         <div class="card-header">
             <div class="row">
-                <div class="col-6">
+                <div class="col-auto mr-auto">
                     <h4 class="h4" class="fixed-bottom"> {{recipe.name}}</h4>
                 </div>
+
+                <div class="col-auto">
+                    <a class="btn btn-primary " href="/recipe/edit/{{recipe.slug}}/">Editer</a>
+                </div>
+            </div>
+            
+          </div>
+        <div class="card-body">
+            <div class="row justify-content-center">
                 <div class="col-3">
                     <div class="input-group">
                         <div class="input-group-prepend">
@@ -20,30 +29,44 @@
                                 <i class="material-icons md-36" style="display: inline-flex;vertical-align: text-bottom;">timer</i>
                             </div>
                         </div>
-                        <input type="number" class="form-control text-right" name="recipe_duration" placeholder="Durée" value="{{recipe.duration}}" style="background-color: white;" readonly>
+                        <input type="number" class="form-control text-right" name="recipe_duration" placeholder="Durée" value="{{recipe.duration}}"  readonly>
                         <div class="input-group-append">
-                                <span class="input-group-text">min</span>
+                            <span class="input-group-text">min</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="input-group">
                         <div class="input-group-prepend">
-                        <div class="input-group-text"><i class="material-icons md-36" style="display: inline-flex;vertical-align: text-bottom;">room_service</i></div>
+                            <div class="input-group-text"><i class="material-icons md-36" style="display: inline-flex;vertical-align: text-bottom;">room_service</i></div>
                         </div>
-                            <input type="number" class="form-control text-right" name="recipe_serving" placeholder="Portion" value="{{recipe.serving}}" style="background-color: white;" readonly>
-                        </div>
+                        <input type="number" class="form-control text-right" name="recipe_serving" placeholder="Portion" value="{{recipe.serving}}"  readonly>
                     </div>
                 </div>
-
-          </div>
-        <div class="card-body">
+            </div>
+            <hr class="mt-0 mb-4 hr-transparent">   
+            <div class="row">
+                <div class="col">
+                   <h5 class="title">Description</h5> 
+                   <p> 
+                        {{recipe.description}}
+                   </p>
+                </div>
+                <div class="col">
+                    <h5 class="title">Note</h5> 
+                   <p> 
+                        {{recipe.note|urlize}}
+                   </p>
+                </div>
+            </div>
+            <hr size="30">
+            <hr class="mt-0 mb-4 hr-transparent">   
             <div class="row">
                 <div class="col">
                     <h5 class="title">Ingrédients</h5>
                     {% for ingredient in ingredients %}
                         <p>
-                        {{ingredient.amount}} {{ingredient.name}} {{ingredient.unit.name}}
+                        {{ingredient.amount|floatformat}} {{ingredient.unit.name}} {{ingredient.name}} 
                         </p>
                     {% endfor %}
                     </ul>
@@ -52,7 +75,7 @@
                     <h5 class="title">Instructions</h5>
                     {% for instruction in instructions %}
                         <p>
-                            {{instruction.sort}}. {{instruction.text}}
+                            {{instruction.sort|add:"1"}}. {{instruction.text}}
                         </p>
                     {% endfor %}
                 </div>

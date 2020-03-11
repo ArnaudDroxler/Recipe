@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 from django.http import HttpResponse,HttpResponseRedirect
 from .models import *
 from django.contrib.auth.models import User
@@ -9,7 +10,16 @@ from .forms import Tag_Form,Unit_Form
 def home(request):
     if request.user.is_authenticated:
 
-        recipes_all = Recipe.objects.all()
+        search_tag = request.GET.get('search', None)
+
+        if search_tag:
+            recipes_search_name = Recipe.objects.filter(name__contains=search_tag)
+            recipes_search_description = Recipe.objects.filter(description__contains=search_tag)
+            recipes_search_tags = Recipe.objects.filter(tags__tag__contains=search_tag)
+            recipes_all = recipes_search_name.union(recipes_search_description,recipes_search_tags)
+        else:
+            recipes_all = Recipe.objects.all()
+        
 
         page = request.GET.get('page', 1)
 
@@ -66,8 +76,8 @@ def add_recipe(request):
                 new_ingredient.save()
 
             new_recipe.save()
-
-            return HttpResponseRedirect('/')
+            return redirect('view_recipe', recipe_slug=new_recipe.slug)
+            
         if request.method == 'GET':    
             units_all = Unit.objects.all()    
             tags_all = Tag.objects.all()
@@ -82,6 +92,15 @@ def view_recipe(request,recipe_slug):
 
     context = {'recipe': recipe, 'ingredients': ingredients,'instructions': instructions}
     return render(request, 'view_recipe.html', context)
+
+def edit_recipe(request,recipe_slug):
+
+    recipe = Recipe.objects.get(slug=recipe_slug)
+    ingredients = Ingredient.objects.filter(recipe=recipe)
+    instructions = Instruction.objects.filter(recipe=recipe).order_by('sort')
+
+    context = {'recipe': recipe, 'ingredients': ingredients,'instructions': instructions}
+    return render(request, 'add_recipe.html', context)
 
 def settings(request):
     if request.user.is_authenticated:

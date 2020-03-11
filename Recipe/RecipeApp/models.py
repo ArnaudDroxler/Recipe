@@ -8,7 +8,7 @@ class Tag(models.Model):
         return "Id :" + str(self.pk) + " Tag :" + self.tag
 
 class Recipe(models.Model):
-    name = models.CharField(max_length=100, null=False, unique=True)
+    name = models.CharField(max_length=500, null=False, unique=True)
     duration = models.IntegerField(default=0, null=False)
     serving = models.IntegerField(default=1, null=False)
     description = models.TextField(max_length=1000, default="", null=False)

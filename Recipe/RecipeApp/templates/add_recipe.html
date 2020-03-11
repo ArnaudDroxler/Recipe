@@ -52,7 +52,7 @@
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="select">Tags</label>
                         </div>
-                        <select class="selectpicker form-control" data-style="btn-outline-secondary" name="tags" multiple>
+                        <select class="selectpicker form-control" data-style="btn-outline-secondary" name="tags" title="Aucun tag sélectionné" multiple>
                             {% for tag in tags %}
                                 <option>{{tag.tag}}</option>
                             {% endfor %}
