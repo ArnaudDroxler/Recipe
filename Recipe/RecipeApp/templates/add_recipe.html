@@ -21,7 +21,7 @@
             {% csrf_token %}
                <div class="row">
                     <div class="col-6">
-                        <input type="text" class="form-control" name="recipe_name" placeholder="Nom de la recette" required>
+                        <input type="text" class="form-control" name="recipe_name" placeholder="Nom de la recette" value="{{recipe.name}}" required>
                     </div>
                     <div class="col-3">
                         <div class="input-group">
@@ -30,7 +30,7 @@
                                     <i class="material-icons md-36" style="display: inline-flex;vertical-align: text-bottom;">timer</i>
                                 </div>
                             </div>
-                            <input type="number" class="form-control text-right" name="recipe_duration" placeholder="Durée" required>
+                            <input type="number" class="form-control text-right" name="recipe_duration" placeholder="Durée" value="{{recipe.duration}}" required>
                             <div class="input-group-append">
                                  <span class="input-group-text">min</span>
                             </div>
@@ -41,7 +41,7 @@
                             <div class="input-group-prepend">
                             <div class="input-group-text"><i class="material-icons md-36" style="display: inline-flex;vertical-align: text-bottom;">room_service</i></div>
                             </div>
-                            <input type="number" class="form-control text-right" name="recipe_serving" placeholder="Portion" required>
+                            <input type="number" class="form-control text-right" name="recipe_serving" placeholder="Portion" value="{{recipe.serving}}" required>
                         </div>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Description</span>
                         </div>
-                        <textarea class="form-control" aria-label="Description" name="recipe_description" rows="1"></textarea>
+                        <textarea class="form-control" aria-label="Description" name="recipe_description"  rows="1">{{recipe.description}}</textarea>
                         </div>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Note</span>
                         </div>
-                        <textarea class="form-control" aria-label="Note" name="recipe_note" rows="1"></textarea>
+                        <textarea class="form-control" aria-label="Note" name="recipe_note" rows="1">{{recipe.note}}</textarea>
                         </div>
                     </div>
                 </div>
@@ -87,6 +87,23 @@
                     <div class="col-5">
                         <h5 class="title">Liste des ingrédients</h5>
                         <div id="ingredient_target">
+                        {% for ingredient in ingredients %}
+                            <div class="form-row align-items-center" id="ingredient_row_[[ count ]]">
+                                <div class="col">
+                                    <input type="text" class="form-control mb-2" name="ingredient_name_[[ count ]]" placeholder="Ingrédient" value="{{ ingredient.name }}"required>
+                                </div>
+                                <div class="col-4">
+                                    <input type="number" class="form-control mb-2" name="ingredient_amount_[[ count ]]" placeholder="Quantité" min="1" max="100000" value="{{ ingredient.amount }}" required>
+                                </div>
+                                <div class="col-3">
+                                    <select class="custom-select mb-2" name="ingredient_unit_select_[[ count ]]" placeholder="Unité" value="{{ ingredient.unit }}" required>
+                                        {% for unit in units %}
+                                            <option value="{{unit.id}}">{{ unit.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        {% endfor %}
                         </div>
                         <button type="button" class="btn btn-outline-primary float-right" id="add_ingredient"><i style="vertical-align: bottom;" class="material-icons">add</i></button>
                         <button type="button" class="btn btn-outline-secondary" id="remove_ingredient"><i style="vertical-align: bottom;" class="material-icons">remove</i></button>
@@ -94,6 +111,15 @@
                     <div class="col-7">
                         <h5 class="title">Liste des instructions</h5>
                         <div id="instruction_target">
+                            {% for instruction in instructions %}
+                                <div class="row" id="instruction_row_[[ count ]]">
+                                    <div class="col">
+                                    <div class="form-group">
+                                            <textarea class="form-control"  id="text_[[ count ]]" name="text_[[ count ]]" rows="3" placeholder="{{instruction.sort}}. étape" required>{{instruction.text}}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
                         </div>
                         <button type="button" class="btn btn-outline-primary float-right" id="add_instruction"><i style="vertical-align: bottom;" class="material-icons">add</i></button>
                         <button type="button" class="btn btn-outline-secondary" id="remove_instruction"><i style="vertical-align: bottom;" class="material-icons">remove</i></button>
